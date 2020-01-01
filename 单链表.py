@@ -57,7 +57,7 @@ class SingleList:
         :return:
         """
         cur = self.head
-        n = 0
+        n = 1
         if not cur:
             return n
         else:
@@ -111,14 +111,16 @@ class SingleList:
         if self.is_empty:
             raise ValueError("null")
         cur = self.head
+        pre = None
         if cur.item == item:
             self.head = cur.next
-        else:
-            while cur.next:
+        while cur:
+            if cur.item == item:
+                pre.next = cur.next
+                break
+            else:
                 pre = cur
                 cur = cur.next
-                if cur.item == item:
-                    pre.next = cur
 
     def search(self, item):
         """
@@ -126,6 +128,8 @@ class SingleList:
         :param item:
         :return:
         """
+        if self.is_empty:
+            raise ValueError("error null")
         cur = self.head
         while None != cur:
             if cur.item == item:
@@ -151,4 +155,7 @@ if __name__ == "__main__":
     print(s.search("d"))
     # 删除节点
     s.delete("f")
+    print("删除成功:")
     s.traversal()
+    # 长度
+    print(s.length)
